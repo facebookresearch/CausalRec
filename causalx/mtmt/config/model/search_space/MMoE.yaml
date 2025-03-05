@@ -1,0 +1,2 @@
+model.loss_config.loss_type: choice("bce")
+model.num_experts: choice(2, 4, 8, 16)

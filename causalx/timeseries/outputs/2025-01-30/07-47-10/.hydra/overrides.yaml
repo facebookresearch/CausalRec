@@ -1,0 +1,6 @@
+- +dataset=cancer_sim
+- +backbone=ct
+- +backbone/ct_hparams/cancer_sim_subgroup_random=6_ct_SGA_Kmeans.yaml
+- exp.seed=10
+- exp.number_clusters=3
+- exp.alpha_wass=0.1

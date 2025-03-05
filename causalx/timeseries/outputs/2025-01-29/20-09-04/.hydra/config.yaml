@@ -1,0 +1,69 @@
+model:
+  dim_treatments: 4
+  dim_vitals: 0
+  dim_static_features: 1
+  dim_outcomes: 1
+  name: G-Net
+  g_net:
+    _target_: src.models.gnet.GNet
+    seq_hidden_units: 24
+    num_layer: 1
+    r_size: 18
+    fc_hidden_units: 72
+    num_comp: 1
+    mc_samples: 50
+    fit_vitals: true
+    comp_sizes: null
+    batch_size: 1024
+    dropout_rate: 0.2
+    optimizer:
+      optimizer_cls: adam
+      learning_rate: 0.01
+      weight_decay: 0.0
+      lr_scheduler: false
+    tune_hparams: false
+    tune_range: 50
+    hparams_grid: null
+    resources_per_trial: null
+dataset:
+  val_batch_size: 4096
+  treatment_mode: multiclass
+  _target_: src.data.SyntheticCancerDatasetCollection
+  name: tumor_generator
+  coeff: 6.0
+  chemo_coeff: ${dataset.coeff}
+  radio_coeff: ${dataset.coeff}
+  seed: ${exp.seed}
+  random: false
+  noise_percentage: 0.0
+  num_patients:
+    train: 10000
+    val: 1000
+    test: 1000
+  window_size: 15
+  lag: 0
+  max_seq_length: 60
+  projection_horizon: 5
+  cf_seq_mode: sliding_treatment
+  holdout_ratio: 0.1
+exp:
+  seed: 10
+  gpus:
+  - 0
+  max_epochs: 50
+  logging: true
+  mlflow_uri: http://127.0.0.1:5000
+  unscale_rmse: true
+  percentage_rmse: true
+  alpha: 1.0
+  update_alpha: false
+  alpha_rate: exp
+  initial_balancing_method: null
+  final_balancing_method: null
+  bce_weight: false
+  weights_ema: true
+  beta: 0.99
+  alpha_wass: 0.0001
+  alpha_wass_epoch: false
+  alpha_wass_growth: 0.001
+  alpha_wass_max: 0.01

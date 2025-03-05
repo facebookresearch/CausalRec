@@ -1,0 +1,8 @@
+- +dataset=cancer_sim
+- +backbone=crn
+- +backbone/crn_hparams/cancer_sim_grad_reverse_random=6_crn_random.yaml
+- exp.seed=10
+- exp.balancing_switch_epoch=29
+- exp.max_epochs=30
+- model.encoder.batch_size=1024
+- model.decoder.batch_size=4096

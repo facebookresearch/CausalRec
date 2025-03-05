@@ -1,0 +1,5 @@
+- +dataset=cancer_sim
+- +backbone=ct
+- +backbone/ct_hparams/cancer_sim_subgroup_random=5_ct_random_SGA.yaml
+- exp.seed=10
+- exp.gap_epoch=100

@@ -1,0 +1,5 @@
+name: "test"
+loss_config:
+  loss_type: "l2"
+  loss_weight_list: [1]
+  

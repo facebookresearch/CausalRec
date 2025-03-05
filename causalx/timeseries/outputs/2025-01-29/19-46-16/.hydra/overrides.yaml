@@ -1,0 +1,5 @@
+- +dataset=cancer_sim
+- +backbone=rmsn
+- +backbone/rmsn_hparams/cancer_sim=6.yaml
+- exp.seed=10
+- ++dataset.treatment_mode=multilabel

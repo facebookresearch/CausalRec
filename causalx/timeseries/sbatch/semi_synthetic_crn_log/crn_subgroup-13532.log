@@ -1,0 +1,24 @@
+[2024-09-26 01:08:50 +0000] [3048235] [INFO] Starting gunicorn 22.0.0
+[2024-09-26 01:08:50 +0000] [3048235] [INFO] Listening at: http://127.0.0.1:5007 (3048235)
+[2024-09-26 01:08:50 +0000] [3048235] [INFO] Using worker: sync
+[2024-09-26 01:08:50 +0000] [3048237] [INFO] Booting worker with pid: 3048237
+[2024-09-26 01:08:50 +0000] [3048238] [INFO] Booting worker with pid: 3048238
+[2024-09-26 01:08:50 +0000] [3048239] [INFO] Booting worker with pid: 3048239
+[2024-09-26 01:08:50 +0000] [3048240] [INFO] Booting worker with pid: 3048240
+runnables/train_enc_dec.py:18: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name=f'config.yaml', config_path='../config/')
+/opt/hpcaas/.mounts/fs-08d5b24cdba02ca24/home/yilingliu/CausalTransformer/venv/lib/python3.8/site-packages/hydra/_internal/hydra.py:119: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/1.2/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  ret = run_job(
+Error executing job with overrides: ['+dataset=cancer_sim', '+backbone=crn', '+backbone/crn_hparams/mimic3_synthetic=1000_subgroup.yaml', 'exp.seed=10', 'exp.mlflow_uri=http://127.0.0.1:5007']
+Traceback (most recent call last):
+  File "runnables/train_enc_dec.py", line 33, in main
+    logger.info('\n' + OmegaConf.to_yaml(args, resolve=True))
+omegaconf.errors.InterpolationToMissingValueError: MissingMandatoryValue while resolving interpolation: Missing mandatory value: dataset.coeff
+    full_key: dataset.chemo_coeff
+    object_type=dict
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

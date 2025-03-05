@@ -1,0 +1,15 @@
+name: "MMoE_Transformer"
+loss_config:
+  loss_type: "bce"
+  loss_weight_list: [1.1, 1]
+
+num_experts: 10
+expert_hidden_units: [512, 256, 128]
+gate_hidden_units: [128, 64]
+tower_hidden_units: [128, 64]
+hidden_activations: "ReLU"
+net_dropout: 0.2
+batch_norm: False
+task: binary_classification
+gating_output_activation: "softmax"  # or "top_k"
+top_k: 2  # Only needed if using top_k

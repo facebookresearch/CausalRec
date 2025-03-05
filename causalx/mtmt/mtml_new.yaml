@@ -1,0 +1,54 @@
+name: mtml
+channels:
+  - pytorch
+  - nvidia
+  - https://aws-ml-conda.s3.us-west-2.amazonaws.com
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10.14
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - xgboost
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pip
+  - pip:
+      - absl-py
+      - antlr4-python3-runtime
+      - ax-platform
+      - botorch
+      - catenets
+      - causalml
+      - fsspec
+      - gdown
+      - gpytorch
+      - grpcio
+      - hydra-core
+      - hydra-ax-sweeper
+      - jax
+      - jaxlib
+      - jaxtyping
+      - linear-operator
+      - loguru
+      - markdown
+      - ml-dtypes
+      - omegaconf
+      - plotly
+      - protobuf
+      - pytest
+      - tabulate
+      - tenacity
+      - tensorboard
+      - tensorboard-data-server
+      - torcheval
+      - torchtnt
+      - typeguard
+      - typing-inspect
+      - werkzeug
+      - hydra-optuna-sweeper
+

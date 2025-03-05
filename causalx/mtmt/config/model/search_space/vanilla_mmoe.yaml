@@ -1,0 +1,5 @@
+model.loss_config.loss_type: choice("bce_ctcvr")
+model.num_experts: choice(2, 4, 8, 16)
+model.expert_hidden_units: choice([512, 256, 128], [32, 16, 8])
+model.gate_hidden_units: choice([128, 64], [8, 4])
+model.tower_hidden_units: choice([128, 64], [8, 4])

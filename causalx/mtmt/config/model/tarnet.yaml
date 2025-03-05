@@ -1,0 +1,5 @@
+name: "TARNet"
+loss_config:
+  loss_type: "bce"
+  loss_weight_list: [1, 1]
+  

@@ -1,0 +1,8 @@
+- +dataset=cancer_sim
+- +backbone=rmsn
+- +backbone/rmsm_hparams/cancer_sim=6.yaml
+- dataset.coeff=6.0
+- dataset.random=False
+- dataset.noise_percentage=0.00
+- exp.seed=10
+- ++dataset.treatment_mode=multilabel

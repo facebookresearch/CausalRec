@@ -1,0 +1,7 @@
+- +dataset=cancer_sim
+- +backbone=ct
+- +backbone/ct_hparams/cancer_sim_subgroup_random=5_ct_SGA
+- exp.seed=10
+- exp.balancing_switch_epoch=99
+- exp.max_epochs=120
+- exp.gap_epoch=2

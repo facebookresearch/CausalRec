@@ -1,0 +1,6 @@
+- +dataset=cancer_sim
+- +backbone=crn
+- +backbone/crn_hparams/cancer_sim_grad_reverse_random=0_finetune.yaml
+- exp.seed=10
+- exp.max_epochs=120
+- dataset.noise_percentage=0.1

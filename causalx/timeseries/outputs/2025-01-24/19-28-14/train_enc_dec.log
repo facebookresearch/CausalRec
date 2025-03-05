@@ -1,0 +1,251 @@
+[2025-01-24 19:28:14,472][__main__][INFO] - 
+model:
+  dim_treatments: ???
+  dim_vitals: ???
+  dim_static_features: ???
+  dim_outcomes: ???
+  name: CRN
+  encoder:
+    _target_: src.models.crn.CRNEncoder
+    seq_hidden_units: 74
+    br_size: 74
+    fc_hidden_units: 37
+    dropout_rate: 0.1
+    num_layer: 1
+    batch_size: 128
+    optimizer:
+      optimizer_cls: adam
+      learning_rate: 0.001
+      weight_decay: 0.0
+      lr_scheduler: false
+    tune_hparams: false
+    tune_range: 50
+    hparams_grid: null
+    resources_per_trial: null
+  train_decoder: true
+  decoder:
+    _target_: src.models.crn.CRNDecoder
+    seq_hidden_units: null
+    br_size: 98
+    fc_hidden_units: 98
+    dropout_rate: 0.1
+    num_layer: 2
+    batch_size: 512
+    optimizer:
+      optimizer_cls: adam
+      learning_rate: 0.0001
+      weight_decay: 0.0
+      lr_scheduler: false
+    tune_hparams: false
+    tune_range: 30
+    hparams_grid: null
+    resources_per_trial: null
+dataset:
+  val_batch_size: 512
+  treatment_mode: multilabel
+  _target_: src.data.MIMIC3SyntheticDatasetCollection
+  seed: 123
+  name: mimic3_synthetic
+  path: data/processed/all_hourly_data.h5
+  min_seq_length: 20
+  max_seq_length: 100
+  max_number: 1000
+  data_seed: 123
+  projection_horizon: 10
+  n_treatments_seq: 10
+  split:
+    val: 0.2
+    test: 0.2
+  autoregressive: true
+  random: true
+  vital_list:
+  - heart rate
+  - red blood cell count
+  - sodium
+  - mean blood pressure
+  - systemic vascular resistance
+  - glucose
+  - chloride urine
+  - glascow coma scale total
+  - hematocrit
+  - positive end-expiratory pressure set
+  - respiratory rate
+  - prothrombin time pt
+  - cholesterol
+  - hemoglobin
+  - creatinine
+  - blood urea nitrogen
+  - bicarbonate
+  - calcium ionized
+  - partial pressure of carbon dioxide
+  - magnesium
+  - anion gap
+  - phosphorous
+  - venous pvo2
+  - platelets
+  - calcium urine
+  static_list:
+  - gender
+  - ethnicity
+  - age
+  drop_first: false
+  synth_outcomes_list:
+  - _target_: src.data.mimic_iii.SyntheticOutcomeGenerator
+    exogeneous_vars:
+    - heart rate
+    - glucose
+    - sodium
+    exog_dependency:
+      _target_: src.data.mimic_iii.utils.RandomFourierFeaturesFunction
+      input_dim: 3
+      gamma: 0.005
+      scale: 40.0
+    exog_weight: 0.9
+    endo_dependency:
+      _target_: src.data.mimic_iii.utils.DiscretizedRandomGPFunction
+      kernels:
+      - _target_: sklearn.gaussian_process.kernels.Matern
+        length_scale: 25.0
+        nu: 2.5
+      - _target_: sklearn.gaussian_process.kernels.WhiteKernel
+        noise_level: 0.005
+    endo_rand_weight: 0.4
+    endo_spline_weight: 2.0
+    outcome_name: y1
+  - _target_: src.data.mimic_iii.SyntheticOutcomeGenerator
+    exogeneous_vars:
+    - heart rate
+    - glucose
+    - anion gap
+    exog_dependency:
+      _target_: src.data.mimic_iii.utils.RandomFourierFeaturesFunction
+      input_dim: 3
+      gamma: 0.005
+      scale: 40.0
+    exog_weight: 1.0
+    endo_dependency:
+      _target_: src.data.mimic_iii.utils.DiscretizedRandomGPFunction
+      kernels:
+      - _target_: sklearn.gaussian_process.kernels.Matern
+        length_scale: 25.0
+        nu: 2.5
+      - _target_: sklearn.gaussian_process.kernels.WhiteKernel
+        noise_level: 0.001
+    endo_rand_weight: 0.5
+    endo_spline_weight: 3.5
+    outcome_name: y2
+  synth_treatments_list:
+  - _target_: src.data.mimic_iii.SyntheticTreatment
+    confounding_vars:
+    - blood urea nitrogen
+    - glucose
+    - sodium
+    confounder_outcomes:
+    - y1
+    confounding_dependency:
+      _target_: src.data.mimic_iii.utils.RandomFourierFeaturesFunction
+      input_dim: 3
+      gamma: 0.01
+      scale: 30.0
+    window: 3
+    conf_outcome_weight: 2.5
+    conf_vars_weight: 2.5
+    bias: 0.0
+    full_effect: -1.0
+    effect_window: 20
+    treatment_name: t1
+  - _target_: src.data.mimic_iii.SyntheticTreatment
+    confounding_vars:
+    - systemic vascular resistance
+    - bicarbonate
+    - anion gap
+    confounder_outcomes:
+    - y1
+    - y2
+    confounding_dependency:
+      _target_: src.data.mimic_iii.utils.RandomFourierFeaturesFunction
+      input_dim: 3
+      gamma: 0.01
+      scale: 30.0
+    window: 3
+    conf_outcome_weight: 2.0
+    conf_vars_weight: 0.25
+    bias: 1.0
+    full_effect: -1.0
+    effect_window: 20
+    treatment_name: t2
+  - _target_: src.data.mimic_iii.SyntheticTreatment
+    confounding_vars:
+    - chloride urine
+    - glucose
+    - sodium
+    - systemic vascular resistance
+    - magnesium
+    - anion gap
+    confounder_outcomes:
+    - y2
+    confounding_dependency:
+      _target_: src.data.mimic_iii.utils.RandomFourierFeaturesFunction
+      input_dim: 6
+      gamma: 0.01
+      scale: 30.0
+    window: 20
+    conf_outcome_weight: 1.5
+    conf_vars_weight: 0.25
+    bias: 0.0
+    full_effect: -0.75
+    effect_window: 7
+    treatment_name: t3
+  treatment_outcomes_influence:
+    y1:
+    - t1
+    - t2
+    y2:
+    - t2
+    - t3
+  noise_percentage: 0.05
+exp:
+  seed: 123
+  gpus:
+  - 0
+  max_epochs: 500
+  logging: true
+  mlflow_uri: http://127.0.0.1:5000
+  unscale_rmse: false
+  percentage_rmse: false
+  alpha: 0
+  update_alpha: true
+  alpha_rate: exp
+  initial_balancing_method: grad_reverse
+  final_balancing_method: grad_reverse
+  bce_weight: false
+  weights_ema: true
+  beta: 0.99
+  alpha_wass: 1.0e-05
+  alpha_wass_epoch: false
+  alpha_wass_growth: 0.001
+  alpha_wass_max: 0.01
+  balancing: grad_reverse
+  balancing_switch_epoch: 499
+  gap_epoch: 50
+  num_timepoints: 99
+  clustering_method: GMM
+  number_clusters: 2
+  checkpoint_dir: ./checkpoints/mimic3_synthetic/crn/1000_random
+
+[2025-01-24 19:28:14,513][src.data.mimic_iii.load_data][INFO] - Loading MIMIC-III dataset from /opt/hpcaas/.mounts/fs-08d5b24cdba02ca24/home/yilingliu/CausalTransformer_rebuttal/data/processed/all_hourly_data.h5.
+[2025-01-24 19:28:23,959][src.data.mimic_iii.load_data][INFO] - Number of patients filtered: 1000.
+[2025-01-24 19:28:24,037][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Simulating untreated outcome y1
+[2025-01-24 19:28:24,187][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Simulating untreated outcome y2
+[2025-01-24 19:28:24,307][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Simulating factual treatments and applying them to outcomes.
+[2025-01-24 19:37:29,790][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Shape of exploded vitals: (600, 100, 25).
+[2025-01-24 19:37:29,791][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Performing normalisation.
+[2025-01-24 19:37:29,795][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Processing train dataset before training
+[2025-01-24 19:37:29,795][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Shape of processed train data: {'sequence_lengths': (600,), 'prev_treatments': (600, 99, 3), 'vitals': (600, 99, 25), 'next_vitals': (600, 98, 25), 'current_treatments': (600, 99, 3), 'static_features': (600, 44), 'active_entries': (600, 99, 1), 'unscaled_outputs': (600, 99, 2), 'prev_unscaled_outputs': (600, 99, 2), 'outputs': (600, 99, 2), 'prev_outputs': (600, 99, 2)}
+[2025-01-24 19:37:29,813][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Simulating untreated outcome y1
+[2025-01-24 19:37:29,858][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Simulating untreated outcome y2
+[2025-01-24 19:37:29,907][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Simulating factual treatments and applying them to outcomes.
+[2025-01-24 19:39:26,649][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Shape of exploded vitals: (200, 100, 25).
+[2025-01-24 19:39:26,651][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Simulating untreated outcome y1
+[2025-01-24 19:39:26,713][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Simulating untreated outcome y2
+[2025-01-24 19:39:26,782][src.data.mimic_iii.semi_synthetic_dataset][INFO] - Simulating counterfactual_one_step treatments and applying them to outcomes.

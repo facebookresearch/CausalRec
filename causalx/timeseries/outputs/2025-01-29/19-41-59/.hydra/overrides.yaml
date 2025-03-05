@@ -1,0 +1,3 @@
+- +dataset=cancer_sim
+- +backbone=rmsn
+- +backbone/rmsn_hparams/cancer_sim=6.yaml

@@ -1,0 +1,23 @@
+name: "ple2d_DA"
+loss_config:
+  loss_type: "bce_PLE2D_DA_ctcvr"
+  loss_weight_list: [1, 1]
+  da_weight: 0.1  # weight for MMD loss
+  da_method: "mmd"  # or "wasserstein"
+num_layers: 1
+expert_type: "dcnv2"
+dcnv2_model_structure: "stacked"
+dcnv2_num_cross_layers: 3
+num_shared_experts: 1
+num_outcome_shared_experts: 1
+num_treatment_shared_experts: 1
+num_specific_experts: 0
+input_hidden_units: [32]
+expert_hidden_units: [128,64,32]
+gate_hidden_units: [8, 4]
+tower_hidden_units: [8, 4]
+hidden_activations: "ReLU"
+net_dropout: 0
+batch_norm: False
+task: binary_classification
+  

@@ -1,0 +1,5 @@
+- +dataset=cancer_sim
+- +backbone=msm
+- exp.seed=10
+- +dataset.coeff=5
+- ++dataset.treatment_mode=multilabel

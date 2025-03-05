@@ -1,0 +1,79 @@
+[2024-09-19 00:12:17 +0000] [566239] [INFO] Starting gunicorn 22.0.0
+[2024-09-19 00:12:17 +0000] [566239] [ERROR] Connection in use: ('127.0.0.1', 5000)
+[2024-09-19 00:12:17 +0000] [566239] [ERROR] Retrying in 1 second.
+[2024-09-19 00:12:18 +0000] [566239] [ERROR] Connection in use: ('127.0.0.1', 5000)
+[2024-09-19 00:12:18 +0000] [566239] [ERROR] Retrying in 1 second.
+[2024-09-19 00:12:19 +0000] [566239] [ERROR] Connection in use: ('127.0.0.1', 5000)
+[2024-09-19 00:12:19 +0000] [566239] [ERROR] Retrying in 1 second.
+[2024-09-19 00:12:20 +0000] [566239] [ERROR] Connection in use: ('127.0.0.1', 5000)
+[2024-09-19 00:12:20 +0000] [566239] [ERROR] Retrying in 1 second.
+[2024-09-19 00:12:21 +0000] [566239] [ERROR] Connection in use: ('127.0.0.1', 5000)
+[2024-09-19 00:12:21 +0000] [566239] [ERROR] Retrying in 1 second.
+[2024-09-19 00:12:22 +0000] [566239] [ERROR] Can't connect to ('127.0.0.1', 5000)
+Running the mlflow server failed. Please see the logs above for details.
+runnables/train_multi.py:18: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name=f'config.yaml', config_path='../config/')
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/pathlib.py", line 1288, in mkdir
+    self._accessor.mkdir(self, mode)
+PermissionError: [Errno 13] Permission denied: 'outputs/2024-09-19/00-12-25'
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+runnables/train_multi.py:18: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name=f'config.yaml', config_path='../config/')
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/pathlib.py", line 1288, in mkdir
+    self._accessor.mkdir(self, mode)
+PermissionError: [Errno 13] Permission denied: 'outputs/2024-09-19/00-12-37'
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+runnables/train_multi.py:18: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name=f'config.yaml', config_path='../config/')
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/pathlib.py", line 1288, in mkdir
+    self._accessor.mkdir(self, mode)
+PermissionError: [Errno 13] Permission denied: 'outputs/2024-09-19/00-12-46'
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+runnables/train_multi.py:18: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name=f'config.yaml', config_path='../config/')
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/pathlib.py", line 1288, in mkdir
+    self._accessor.mkdir(self, mode)
+PermissionError: [Errno 13] Permission denied: 'outputs/2024-09-19/00-12-57'
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+runnables/train_multi.py:18: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name=f'config.yaml', config_path='../config/')
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/pathlib.py", line 1288, in mkdir
+    self._accessor.mkdir(self, mode)
+PermissionError: [Errno 13] Permission denied: 'outputs/2024-09-19/00-13-10'
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+runnables/train_multi.py:18: UserWarning: 
+The version_base parameter is not specified.
+Please specify a compatability version level, or None.
+Will assume defaults for version 1.1
+  @hydra.main(config_name=f'config.yaml', config_path='../config/')
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/pathlib.py", line 1288, in mkdir
+    self._accessor.mkdir(self, mode)
+PermissionError: [Errno 13] Permission denied: 'outputs/2024-09-19/00-13-22'
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.

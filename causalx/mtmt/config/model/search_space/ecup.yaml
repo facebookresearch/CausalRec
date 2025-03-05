@@ -1,0 +1,60 @@
+# Model identifier
+name: "ECUP"
+
+# Loss configuration
+loss_config:
+  loss_type: "bce_ctcvr"
+  loss_weight_list: [1, 1]
+
+# Network Components
+hidden_units_task:
+  type: "choice"
+  choices:
+    - [512, 256]
+    - [256, 128]
+    - [128, 64]
+    - [64, 32]
+
+hidden_units_treatment:
+  type: "choice"
+  choices:
+    - [64]
+    - [32]
+    - [16]
+
+hidden_units_gate:
+  type: "choice"
+  choices:
+    - [64]
+    - [32]
+    - [16]
+
+hidden_units_task_gate:
+  type: "choice"
+  choices:
+    - [64]
+    - [32]
+    - [16]
+
+# Model Parameters
+task_dim:
+  type: "choice"
+  choices: [1, 2, 4]
+
+num_heads:
+  type: "choice"
+  choices: [2, 4, 8]
+
+hidden_activations:
+  type: "choice"
+  choices: ["ELU", "ReLU"]
+
+net_dropout:
+  type: "choice"
+  choices: [0.0, 0.1, 0.2]
+
+batch_norm:
+  type: "choice"
+  choices: [true, false]
+
+task: "binary_classification" 

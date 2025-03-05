@@ -1,0 +1,183 @@
+[2025-01-27 17:56:37,061][__main__][INFO] - 
+model:
+  dim_treatments: 4
+  dim_vitals: 0
+  dim_static_features: 1
+  dim_outcomes: 1
+  name: MSM
+  lag_features: 1
+  propensity_treatment:
+    _target_: src.models.msm.MSMPropensityTreatment
+  propensity_history:
+    _target_: src.models.msm.MSMPropensityHistory
+  msm_regressor:
+    _target_: src.models.msm.MSMRegressor
+dataset:
+  val_batch_size: 512
+  treatment_mode: multilabel
+  _target_: src.data.SyntheticCancerDatasetCollection
+  name: tumor_generator
+  coeff: 6.0
+  chemo_coeff: 6.0
+  radio_coeff: 6.0
+  seed: 10
+  random: false
+  noise_percentage: 0.0
+  num_patients:
+    train: 10000
+    val: 1000
+    test: 1000
+  window_size: 15
+  lag: 0
+  max_seq_length: 60
+  projection_horizon: 5
+  cf_seq_mode: sliding_treatment
+exp:
+  seed: 10
+  gpus:
+  - 0
+  max_epochs: 100
+  logging: true
+  mlflow_uri: http://127.0.0.1:5000
+  unscale_rmse: true
+  percentage_rmse: true
+  alpha: 1.0
+  update_alpha: false
+  alpha_rate: exp
+  initial_balancing_method: null
+  final_balancing_method: null
+  bce_weight: false
+  weights_ema: true
+  beta: 0.99
+  alpha_wass: 0.0001
+  alpha_wass_epoch: false
+  alpha_wass_growth: 0.001
+  alpha_wass_max: 0.01
+
+[2025-01-27 17:56:37,073][root][INFO] - Simulating initial volumes for stage I  with norm params: mu=1.72, sigma=4.7, lb=-0.6221218732608373, ub=-0.023523848418276528
+[2025-01-27 17:56:37,075][root][INFO] - Simulating initial volumes for stage II  with norm params: mu=1.96, sigma=1.63, lb=-1.9410876100159118, ub=0.3711345751297772
+[2025-01-27 17:56:37,076][root][INFO] - Simulating initial volumes for stage IIIA  with norm params: mu=1.91, sigma=9.4, lb=-0.33127370258786554, ub=0.06967546355973796
+[2025-01-27 17:56:37,076][root][INFO] - Simulating initial volumes for stage IIIB  with norm params: mu=2.76, sigma=6.87, lb=-0.5769974969906748, ub=-0.02839165102452155
+[2025-01-27 17:56:37,079][root][INFO] - Simulating initial volumes for stage IV  with norm params: mu=3.86, sigma=8.82, lb=-0.5741465764541877, ub=-0.14683113860980307
+[2025-01-27 17:56:37,088][root][INFO] - Got correlated params for 4658 patients
+[2025-01-27 17:56:37,093][root][INFO] - Got correlated params for 9338 patients
+[2025-01-27 17:56:37,097][root][INFO] - Got correlated params for 13912 patients
+[2025-01-27 17:56:37,104][root][INFO] - Simulating beta_c parameters
+[2025-01-27 17:56:37,109][root][INFO] - Randomising outputs
+[2025-01-27 17:56:55,150][root][INFO] - Simulating initial volumes for stage I  with norm params: mu=1.72, sigma=4.7, lb=-0.6221218732608373, ub=-0.023523848418276528
+[2025-01-27 17:56:55,152][root][INFO] - Simulating initial volumes for stage II  with norm params: mu=1.96, sigma=1.63, lb=-1.9410876100159118, ub=0.3711345751297772
+[2025-01-27 17:56:55,153][root][INFO] - Simulating initial volumes for stage IIIA  with norm params: mu=1.91, sigma=9.4, lb=-0.33127370258786554, ub=0.06967546355973796
+[2025-01-27 17:56:55,154][root][INFO] - Simulating initial volumes for stage IIIB  with norm params: mu=2.76, sigma=6.87, lb=-0.5769974969906748, ub=-0.02839165102452155
+[2025-01-27 17:56:55,154][root][INFO] - Simulating initial volumes for stage IV  with norm params: mu=3.86, sigma=8.82, lb=-0.5741465764541877, ub=-0.14683113860980307
+[2025-01-27 17:56:55,157][root][INFO] - Got correlated params for 464 patients
+[2025-01-27 17:56:55,158][root][INFO] - Got correlated params for 942 patients
+[2025-01-27 17:56:55,159][root][INFO] - Got correlated params for 1398 patients
+[2025-01-27 17:56:55,160][root][INFO] - Simulating beta_c parameters
+[2025-01-27 17:56:55,161][root][INFO] - Randomising outputs
+[2025-01-27 17:56:56,950][root][INFO] - Simulating initial volumes for stage I  with norm params: mu=1.72, sigma=4.7, lb=-0.6221218732608373, ub=-0.023523848418276528
+[2025-01-27 17:56:56,952][root][INFO] - Simulating initial volumes for stage II  with norm params: mu=1.96, sigma=1.63, lb=-1.9410876100159118, ub=0.3711345751297772
+[2025-01-27 17:56:56,952][root][INFO] - Simulating initial volumes for stage IIIA  with norm params: mu=1.91, sigma=9.4, lb=-0.33127370258786554, ub=0.06967546355973796
+[2025-01-27 17:56:56,953][root][INFO] - Simulating initial volumes for stage IIIB  with norm params: mu=2.76, sigma=6.87, lb=-0.5769974969906748, ub=-0.02839165102452155
+[2025-01-27 17:56:56,954][root][INFO] - Simulating initial volumes for stage IV  with norm params: mu=3.86, sigma=8.82, lb=-0.5741465764541877, ub=-0.14683113860980307
+[2025-01-27 17:56:56,956][root][INFO] - Got correlated params for 491 patients
+[2025-01-27 17:56:56,957][root][INFO] - Got correlated params for 936 patients
+[2025-01-27 17:56:56,958][root][INFO] - Got correlated params for 1396 patients
+[2025-01-27 17:56:56,959][root][INFO] - Simulating beta_c parameters
+[2025-01-27 17:56:56,960][root][INFO] - Randomising outputs
+[2025-01-27 17:57:03,314][root][INFO] - Simulating initial volumes for stage I  with norm params: mu=1.72, sigma=4.7, lb=-0.6221218732608373, ub=-0.023523848418276528
+[2025-01-27 17:57:03,315][root][INFO] - Simulating initial volumes for stage II  with norm params: mu=1.96, sigma=1.63, lb=-1.9410876100159118, ub=0.3711345751297772
+[2025-01-27 17:57:03,316][root][INFO] - Simulating initial volumes for stage IIIA  with norm params: mu=1.91, sigma=9.4, lb=-0.33127370258786554, ub=0.06967546355973796
+[2025-01-27 17:57:03,316][root][INFO] - Simulating initial volumes for stage IIIB  with norm params: mu=2.76, sigma=6.87, lb=-0.5769974969906748, ub=-0.02839165102452155
+[2025-01-27 17:57:03,317][root][INFO] - Simulating initial volumes for stage IV  with norm params: mu=3.86, sigma=8.82, lb=-0.5741465764541877, ub=-0.14683113860980307
+[2025-01-27 17:57:03,319][root][INFO] - Got correlated params for 434 patients
+[2025-01-27 17:57:03,320][root][INFO] - Got correlated params for 874 patients
+[2025-01-27 17:57:03,321][root][INFO] - Got correlated params for 1357 patients
+[2025-01-27 17:57:03,322][root][INFO] - Simulating beta_c parameters
+[2025-01-27 17:57:03,323][root][INFO] - Randomising outputs
+[2025-01-27 17:57:32,029][src.data.cancer_sim.dataset][INFO] - Processing train dataset before training
+[2025-01-27 17:57:32,069][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'cancer_volume': (10000, 60), 'chemo_dosage': (10000, 60), 'radio_dosage': (10000, 60), 'chemo_application': (10000, 60), 'radio_application': (10000, 60), 'chemo_probabilities': (10000, 60), 'radio_probabilities': (10000, 60), 'sequence_lengths': (10000,), 'death_flags': (10000, 60), 'recovery_flags': (10000, 60), 'patient_types': (10000,), 'prev_treatments': (10000, 59, 2), 'current_treatments': (10000, 59, 2), 'current_covariates': (10000, 59, 2), 'outputs': (10000, 59, 1), 'active_entries': (10000, 59, 1), 'unscaled_outputs': (10000, 59, 1), 'prev_outputs': (10000, 59, 1), 'static_features': (10000, 1)}
+[2025-01-27 17:57:32,069][src.data.cancer_sim.dataset][INFO] - Processing val dataset before training
+[2025-01-27 17:57:32,073][src.data.cancer_sim.dataset][INFO] - Shape of processed val data: {'cancer_volume': (1000, 60), 'chemo_dosage': (1000, 60), 'radio_dosage': (1000, 60), 'chemo_application': (1000, 60), 'radio_application': (1000, 60), 'chemo_probabilities': (1000, 60), 'radio_probabilities': (1000, 60), 'sequence_lengths': (1000,), 'death_flags': (1000, 60), 'recovery_flags': (1000, 60), 'patient_types': (1000,), 'prev_treatments': (1000, 59, 2), 'current_treatments': (1000, 59, 2), 'current_covariates': (1000, 59, 2), 'outputs': (1000, 59, 1), 'active_entries': (1000, 59, 1), 'unscaled_outputs': (1000, 59, 1), 'prev_outputs': (1000, 59, 1), 'static_features': (1000, 1)}
+[2025-01-27 17:57:32,074][src.data.cancer_sim.dataset][INFO] - Processing test dataset before training
+[2025-01-27 17:57:32,849][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'cancer_volume': (224868, 60), 'chemo_application': (224868, 60), 'radio_application': (224868, 60), 'sequence_lengths': (224868,), 'patient_types': (224868,), 'prev_treatments': (224868, 59, 2), 'current_treatments': (224868, 59, 2), 'current_covariates': (224868, 59, 2), 'outputs': (224868, 59, 1), 'active_entries': (224868, 59, 1), 'unscaled_outputs': (224868, 59, 1), 'prev_outputs': (224868, 59, 1), 'static_features': (224868, 1)}
+[2025-01-27 17:57:32,850][src.data.cancer_sim.dataset][INFO] - Processing test dataset before training
+[2025-01-27 17:57:34,836][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'cancer_volume': (548744, 65), 'chemo_application': (548744, 65), 'radio_application': (548744, 65), 'sequence_lengths': (548744,), 'patient_types': (548744,), 'patient_ids_all_trajectories': (548744,), 'patient_current_t': (548744,), 'prev_treatments': (548744, 64, 2), 'current_treatments': (548744, 64, 2), 'current_covariates': (548744, 64, 2), 'outputs': (548744, 64, 1), 'active_entries': (548744, 64, 1), 'unscaled_outputs': (548744, 64, 1), 'prev_outputs': (548744, 64, 1), 'static_features': (548744, 1)}
+[2025-01-27 17:57:34,837][src.data.cancer_sim.dataset][INFO] - Processing test dataset before testing (multiple sequences)
+[2025-01-27 17:57:41,853][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'active_encoder_r': (548744, 59), 'prev_treatments': (548744, 5, 2), 'current_treatments': (548744, 5, 2), 'current_covariates': (548744, 5, 2), 'prev_outputs': (548744, 5, 1), 'static_features': (548744, 1), 'outputs': (548744, 5, 1), 'sequence_lengths': (548744,), 'active_entries': (548744, 5, 1), 'unscaled_outputs': (548744, 5, 1), 'patient_types': (548744,), 'patient_ids_all_trajectories': (548744,), 'patient_current_t': (548744,)}
+[2025-01-27 17:57:43,301][src.models.msm][INFO] - Input size of propensity_treatment: 2
+[2025-01-27 17:57:44,220][src.data.cancer_sim.dataset][INFO] - Exploding train dataset before testing (multiple sequences)
+[2025-01-27 17:57:47,663][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'prev_treatments': (565421, 59, 2), 'current_treatments': (565421, 59, 2), 'static_features': (565421, 1), 'prev_outputs': (565421, 59, 1), 'outputs': (565421, 59, 1), 'unscaled_outputs': (565421, 59, 1), 'sequence_lengths': (565421,), 'active_entries': (565421, 59, 1)}
+[2025-01-27 17:57:50,613][src.models.msm][INFO] - Input size of propensity_history: 4
+[2025-01-27 17:57:51,226][src.data.cancer_sim.dataset][INFO] - Exploding train dataset before testing (multiple sequences)
+[2025-01-27 17:57:54,676][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'prev_treatments': (565421, 59, 2), 'current_treatments': (565421, 59, 2), 'static_features': (565421, 1), 'prev_outputs': (565421, 59, 1), 'outputs': (565421, 59, 1), 'unscaled_outputs': (565421, 59, 1), 'sequence_lengths': (565421,), 'active_entries': (565421, 59, 1)}
+[2025-01-27 17:57:59,328][src.models.msm][INFO] - Input size of msm_regressor: 4
+[2025-01-27 17:57:59,770][src.models.msm][INFO] - Propensity scores for train.
+[2025-01-27 17:57:59,822][src.data.cancer_sim.dataset][INFO] - Exploding train dataset before testing (multiple sequences)
+[2025-01-27 17:58:03,425][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 17:58:04,478][src.models.msm][INFO] - Propensity scores for train.
+[2025-01-27 17:58:04,522][src.data.cancer_sim.dataset][INFO] - Exploding train dataset before testing (multiple sequences)
+[2025-01-27 17:58:08,124][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 17:58:09,799][src.data.cancer_sim.dataset][INFO] - Exploding train dataset before testing (multiple sequences)
+[2025-01-27 17:58:13,727][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'prev_treatments': (565421, 59, 2), 'current_treatments': (565421, 59, 2), 'static_features': (565421, 1), 'prev_outputs': (565421, 59, 1), 'outputs': (565421, 59, 1), 'unscaled_outputs': (565421, 59, 1), 'sequence_lengths': (565421,), 'active_entries': (565421, 59, 1), 'stabilized_weights': (565421, 59)}
+[2025-01-27 17:58:17,040][src.data.cancer_sim.dataset][INFO] - Exploding train dataset before testing (multiple sequences)
+[2025-01-27 17:58:20,898][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'prev_treatments': (555433, 59, 2), 'current_treatments': (555433, 59, 2), 'static_features': (555433, 1), 'prev_outputs': (555433, 59, 1), 'outputs': (555433, 59, 1), 'unscaled_outputs': (555433, 59, 1), 'sequence_lengths': (555433,), 'active_entries': (555433, 59, 1), 'stabilized_weights': (555433, 59)}
+[2025-01-27 17:58:24,400][src.data.cancer_sim.dataset][INFO] - Exploding train dataset before testing (multiple sequences)
+[2025-01-27 17:58:28,245][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'prev_treatments': (545527, 59, 2), 'current_treatments': (545527, 59, 2), 'static_features': (545527, 1), 'prev_outputs': (545527, 59, 1), 'outputs': (545527, 59, 1), 'unscaled_outputs': (545527, 59, 1), 'sequence_lengths': (545527,), 'active_entries': (545527, 59, 1), 'stabilized_weights': (545527, 59)}
+[2025-01-27 17:58:31,694][src.data.cancer_sim.dataset][INFO] - Exploding train dataset before testing (multiple sequences)
+[2025-01-27 17:58:35,391][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'prev_treatments': (535658, 59, 2), 'current_treatments': (535658, 59, 2), 'static_features': (535658, 1), 'prev_outputs': (535658, 59, 1), 'outputs': (535658, 59, 1), 'unscaled_outputs': (535658, 59, 1), 'sequence_lengths': (535658,), 'active_entries': (535658, 59, 1), 'stabilized_weights': (535658, 59)}
+[2025-01-27 17:58:38,850][src.data.cancer_sim.dataset][INFO] - Exploding train dataset before testing (multiple sequences)
+[2025-01-27 17:58:42,493][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'prev_treatments': (525817, 59, 2), 'current_treatments': (525817, 59, 2), 'static_features': (525817, 1), 'prev_outputs': (525817, 59, 1), 'outputs': (525817, 59, 1), 'unscaled_outputs': (525817, 59, 1), 'sequence_lengths': (525817,), 'active_entries': (525817, 59, 1), 'stabilized_weights': (525817, 59)}
+[2025-01-27 17:58:45,862][src.data.cancer_sim.dataset][INFO] - Exploding train dataset before testing (multiple sequences)
+[2025-01-27 17:58:49,443][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'prev_treatments': (515994, 59, 2), 'current_treatments': (515994, 59, 2), 'static_features': (515994, 1), 'prev_outputs': (515994, 59, 1), 'outputs': (515994, 59, 1), 'unscaled_outputs': (515994, 59, 1), 'sequence_lengths': (515994,), 'active_entries': (515994, 59, 1), 'stabilized_weights': (515994, 59)}
+[2025-01-27 17:58:52,929][src.models.time_varying_model][INFO] - RMSE calculation for test.
+[2025-01-27 17:58:52,930][src.models.msm][INFO] - Predictions for test.
+[2025-01-27 17:58:53,675][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 17:58:57,259][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 17:59:00,465][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 17:59:04,010][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 17:59:07,405][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 17:59:10,955][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 17:59:14,386][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 17:59:17,959][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 17:59:21,450][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 17:59:25,044][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 17:59:28,423][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 17:59:32,007][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 17:59:35,412][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 17:59:39,027][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 17:59:42,417][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 17:59:46,004][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 17:59:49,347][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 17:59:52,949][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 17:59:56,384][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 17:59:59,989][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:00:03,447][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:00:07,051][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:00:10,411][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:00:13,994][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:00:17,431][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:00:20,966][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:00:24,408][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:00:27,948][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:00:31,338][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:00:34,927][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:00:38,278][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:00:41,822][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:00:45,168][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:00:48,747][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:00:52,078][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:00:55,671][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:00:59,060][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:01:02,599][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:01:05,967][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:01:09,543][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:01:12,915][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:01:16,498][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:01:19,880][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:01:23,479][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (580000, 59, 2), 'current_treatments': (580000, 59, 2), 'static_features': (580000, 1), 'prev_outputs': (580000, 59, 1), 'outputs': (580000, 59, 1), 'unscaled_outputs': (580000, 59, 1), 'sequence_lengths': (580000,), 'active_entries': (580000, 59, 1)}
+[2025-01-27 18:01:26,859][src.data.cancer_sim.dataset][INFO] - Exploding test dataset before testing (multiple sequences)
+[2025-01-27 18:01:28,600][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'prev_treatments': (282344, 59, 2), 'current_treatments': (282344, 59, 2), 'static_features': (282344, 1), 'prev_outputs': (282344, 59, 1), 'outputs': (282344, 59, 1), 'unscaled_outputs': (282344, 59, 1), 'sequence_lengths': (282344,), 'active_entries': (282344, 59, 1)}
+[2025-01-27 18:01:30,510][__main__][INFO] - Test normalised RMSE (all): 3.6218216713565123; Test normalised RMSE (orig): 3.205340244051368; Test normalised RMSE (only counterfactual): 2.829737776816227
+[2025-01-27 18:01:30,543][src.models.time_varying_model][INFO] - RMSE calculation for test.
+[2025-01-27 18:01:30,543][src.models.msm][INFO] - Autoregressive Prediction for test.
+[2025-01-27 18:01:46,421][__main__][INFO] - Test normalised RMSE (n-step prediction): {'2-step': 2.933729704920574, '3-step': 2.6284123332602576, '4-step': 2.637935986650163, '5-step': 2.5229222199838497, '6-step': 2.1694094008962734}

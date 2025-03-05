@@ -1,0 +1,215 @@
+[2025-01-27 18:44:39,458][__main__][INFO] - 
+model:
+  dim_treatments: 4
+  dim_vitals: 0
+  dim_static_features: 1
+  dim_outcomes: 1
+  name: RMSN
+  propensity_treatment:
+    _target_: src.models.rmsn.RMSNPropensityNetworkTreatment
+    seq_hidden_units: 8
+    dropout_rate: 0.2
+    num_layer: 1
+    batch_size: 64
+    max_grad_norm: 2.0
+    optimizer:
+      optimizer_cls: adam
+      learning_rate: 0.01
+      weight_decay: 0.0
+      lr_scheduler: false
+    tune_hparams: false
+    tune_range: 50
+    resources_per_trial: null
+    hparams_grid: null
+  propensity_history:
+    _target_: src.models.rmsn.RMSNPropensityNetworkHistory
+    seq_hidden_units: 16
+    dropout_rate: 0.5
+    num_layer: 1
+    batch_size: 128
+    max_grad_norm: 2.0
+    optimizer:
+      optimizer_cls: adam
+      learning_rate: 0.0001
+      weight_decay: 0.0
+      lr_scheduler: false
+    tune_hparams: false
+    tune_range: 50
+    resources_per_trial: null
+    hparams_grid: null
+  encoder:
+    _target_: src.models.rmsn.RMSNEncoder
+    seq_hidden_units: 12
+    dropout_rate: 0.1
+    num_layer: 1
+    batch_size: 128
+    max_grad_norm: 0.5
+    optimizer:
+      optimizer_cls: adam
+      learning_rate: 0.01
+      weight_decay: 0.0
+      lr_scheduler: false
+    tune_hparams: false
+    tune_range: 50
+    resources_per_trial: null
+    hparams_grid: null
+  train_decoder: true
+  decoder:
+    _target_: src.models.rmsn.RMSNDecoder
+    seq_hidden_units: 64
+    dropout_rate: 0.1
+    num_layer: 1
+    batch_size: 1024
+    max_grad_norm: 4.0
+    optimizer:
+      optimizer_cls: adam
+      learning_rate: 0.01
+      weight_decay: 0.0
+      lr_scheduler: false
+    tune_hparams: false
+    tune_range: 20
+    resources_per_trial: null
+dataset:
+  val_batch_size: 512
+  treatment_mode: multilabel
+  _target_: src.data.SyntheticCancerDatasetCollection
+  name: tumor_generator
+  coeff: 6.0
+  chemo_coeff: 6.0
+  radio_coeff: 6.0
+  seed: 10
+  random: false
+  noise_percentage: 0.0
+  num_patients:
+    train: 10000
+    val: 1000
+    test: 1000
+  window_size: 15
+  lag: 0
+  max_seq_length: 60
+  projection_horizon: 5
+  cf_seq_mode: sliding_treatment
+exp:
+  seed: 10
+  gpus:
+  - 0
+  max_epochs: 100
+  logging: true
+  mlflow_uri: http://127.0.0.1:5000
+  unscale_rmse: true
+  percentage_rmse: true
+  alpha: 1.0
+  update_alpha: false
+  alpha_rate: exp
+  initial_balancing_method: null
+  final_balancing_method: null
+  bce_weight: false
+  weights_ema: true
+  beta: 0.99
+  alpha_wass: 0.0001
+  alpha_wass_epoch: false
+  alpha_wass_growth: 0.001
+  alpha_wass_max: 0.01
+
+[2025-01-27 18:44:39,468][root][INFO] - Simulating initial volumes for stage I  with norm params: mu=1.72, sigma=4.7, lb=-0.6221218732608373, ub=-0.023523848418276528
+[2025-01-27 18:44:39,470][root][INFO] - Simulating initial volumes for stage II  with norm params: mu=1.96, sigma=1.63, lb=-1.9410876100159118, ub=0.3711345751297772
+[2025-01-27 18:44:39,470][root][INFO] - Simulating initial volumes for stage IIIA  with norm params: mu=1.91, sigma=9.4, lb=-0.33127370258786554, ub=0.06967546355973796
+[2025-01-27 18:44:39,471][root][INFO] - Simulating initial volumes for stage IIIB  with norm params: mu=2.76, sigma=6.87, lb=-0.5769974969906748, ub=-0.02839165102452155
+[2025-01-27 18:44:39,474][root][INFO] - Simulating initial volumes for stage IV  with norm params: mu=3.86, sigma=8.82, lb=-0.5741465764541877, ub=-0.14683113860980307
+[2025-01-27 18:44:39,482][root][INFO] - Got correlated params for 4658 patients
+[2025-01-27 18:44:39,487][root][INFO] - Got correlated params for 9338 patients
+[2025-01-27 18:44:39,492][root][INFO] - Got correlated params for 13912 patients
+[2025-01-27 18:44:39,499][root][INFO] - Simulating beta_c parameters
+[2025-01-27 18:44:39,503][root][INFO] - Randomising outputs
+[2025-01-27 18:44:54,911][root][INFO] - Simulating initial volumes for stage I  with norm params: mu=1.72, sigma=4.7, lb=-0.6221218732608373, ub=-0.023523848418276528
+[2025-01-27 18:44:54,914][root][INFO] - Simulating initial volumes for stage II  with norm params: mu=1.96, sigma=1.63, lb=-1.9410876100159118, ub=0.3711345751297772
+[2025-01-27 18:44:54,914][root][INFO] - Simulating initial volumes for stage IIIA  with norm params: mu=1.91, sigma=9.4, lb=-0.33127370258786554, ub=0.06967546355973796
+[2025-01-27 18:44:54,915][root][INFO] - Simulating initial volumes for stage IIIB  with norm params: mu=2.76, sigma=6.87, lb=-0.5769974969906748, ub=-0.02839165102452155
+[2025-01-27 18:44:54,916][root][INFO] - Simulating initial volumes for stage IV  with norm params: mu=3.86, sigma=8.82, lb=-0.5741465764541877, ub=-0.14683113860980307
+[2025-01-27 18:44:54,918][root][INFO] - Got correlated params for 464 patients
+[2025-01-27 18:44:54,919][root][INFO] - Got correlated params for 942 patients
+[2025-01-27 18:44:54,920][root][INFO] - Got correlated params for 1398 patients
+[2025-01-27 18:44:54,921][root][INFO] - Simulating beta_c parameters
+[2025-01-27 18:44:54,922][root][INFO] - Randomising outputs
+[2025-01-27 18:44:56,461][root][INFO] - Simulating initial volumes for stage I  with norm params: mu=1.72, sigma=4.7, lb=-0.6221218732608373, ub=-0.023523848418276528
+[2025-01-27 18:44:56,462][root][INFO] - Simulating initial volumes for stage II  with norm params: mu=1.96, sigma=1.63, lb=-1.9410876100159118, ub=0.3711345751297772
+[2025-01-27 18:44:56,463][root][INFO] - Simulating initial volumes for stage IIIA  with norm params: mu=1.91, sigma=9.4, lb=-0.33127370258786554, ub=0.06967546355973796
+[2025-01-27 18:44:56,464][root][INFO] - Simulating initial volumes for stage IIIB  with norm params: mu=2.76, sigma=6.87, lb=-0.5769974969906748, ub=-0.02839165102452155
+[2025-01-27 18:44:56,464][root][INFO] - Simulating initial volumes for stage IV  with norm params: mu=3.86, sigma=8.82, lb=-0.5741465764541877, ub=-0.14683113860980307
+[2025-01-27 18:44:56,466][root][INFO] - Got correlated params for 491 patients
+[2025-01-27 18:44:56,467][root][INFO] - Got correlated params for 936 patients
+[2025-01-27 18:44:56,468][root][INFO] - Got correlated params for 1396 patients
+[2025-01-27 18:44:56,469][root][INFO] - Simulating beta_c parameters
+[2025-01-27 18:44:56,470][root][INFO] - Randomising outputs
+[2025-01-27 18:45:01,966][root][INFO] - Simulating initial volumes for stage I  with norm params: mu=1.72, sigma=4.7, lb=-0.6221218732608373, ub=-0.023523848418276528
+[2025-01-27 18:45:01,968][root][INFO] - Simulating initial volumes for stage II  with norm params: mu=1.96, sigma=1.63, lb=-1.9410876100159118, ub=0.3711345751297772
+[2025-01-27 18:45:01,968][root][INFO] - Simulating initial volumes for stage IIIA  with norm params: mu=1.91, sigma=9.4, lb=-0.33127370258786554, ub=0.06967546355973796
+[2025-01-27 18:45:01,969][root][INFO] - Simulating initial volumes for stage IIIB  with norm params: mu=2.76, sigma=6.87, lb=-0.5769974969906748, ub=-0.02839165102452155
+[2025-01-27 18:45:01,970][root][INFO] - Simulating initial volumes for stage IV  with norm params: mu=3.86, sigma=8.82, lb=-0.5741465764541877, ub=-0.14683113860980307
+[2025-01-27 18:45:01,972][root][INFO] - Got correlated params for 434 patients
+[2025-01-27 18:45:01,973][root][INFO] - Got correlated params for 874 patients
+[2025-01-27 18:45:01,974][root][INFO] - Got correlated params for 1357 patients
+[2025-01-27 18:45:01,975][root][INFO] - Simulating beta_c parameters
+[2025-01-27 18:45:01,976][root][INFO] - Randomising outputs
+[2025-01-27 18:45:27,059][src.data.cancer_sim.dataset][INFO] - Processing train dataset before training
+[2025-01-27 18:45:27,096][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'cancer_volume': (10000, 60), 'chemo_dosage': (10000, 60), 'radio_dosage': (10000, 60), 'chemo_application': (10000, 60), 'radio_application': (10000, 60), 'chemo_probabilities': (10000, 60), 'radio_probabilities': (10000, 60), 'sequence_lengths': (10000,), 'death_flags': (10000, 60), 'recovery_flags': (10000, 60), 'patient_types': (10000,), 'prev_treatments': (10000, 59, 2), 'current_treatments': (10000, 59, 2), 'current_covariates': (10000, 59, 2), 'outputs': (10000, 59, 1), 'active_entries': (10000, 59, 1), 'unscaled_outputs': (10000, 59, 1), 'prev_outputs': (10000, 59, 1), 'static_features': (10000, 1)}
+[2025-01-27 18:45:27,096][src.data.cancer_sim.dataset][INFO] - Processing val dataset before training
+[2025-01-27 18:45:27,100][src.data.cancer_sim.dataset][INFO] - Shape of processed val data: {'cancer_volume': (1000, 60), 'chemo_dosage': (1000, 60), 'radio_dosage': (1000, 60), 'chemo_application': (1000, 60), 'radio_application': (1000, 60), 'chemo_probabilities': (1000, 60), 'radio_probabilities': (1000, 60), 'sequence_lengths': (1000,), 'death_flags': (1000, 60), 'recovery_flags': (1000, 60), 'patient_types': (1000,), 'prev_treatments': (1000, 59, 2), 'current_treatments': (1000, 59, 2), 'current_covariates': (1000, 59, 2), 'outputs': (1000, 59, 1), 'active_entries': (1000, 59, 1), 'unscaled_outputs': (1000, 59, 1), 'prev_outputs': (1000, 59, 1), 'static_features': (1000, 1)}
+[2025-01-27 18:45:27,100][src.data.cancer_sim.dataset][INFO] - Processing test dataset before training
+[2025-01-27 18:45:27,830][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'cancer_volume': (224868, 60), 'chemo_application': (224868, 60), 'radio_application': (224868, 60), 'sequence_lengths': (224868,), 'patient_types': (224868,), 'prev_treatments': (224868, 59, 2), 'current_treatments': (224868, 59, 2), 'current_covariates': (224868, 59, 2), 'outputs': (224868, 59, 1), 'active_entries': (224868, 59, 1), 'unscaled_outputs': (224868, 59, 1), 'prev_outputs': (224868, 59, 1), 'static_features': (224868, 1)}
+[2025-01-27 18:45:27,843][src.models.rmsn][INFO] - Input size of propensity_treatment: 2
+[2025-01-27 18:51:16,011][src.models.time_varying_model][INFO] - BCE calculation for val.
+[2025-01-27 18:51:16,011][src.models.rmsn][INFO] - Propensity scores for val.
+[2025-01-27 18:51:16,423][__main__][INFO] - Val normalised BCE (all): 0.7341434302648787; Val normalised RMSE (orig): 0.7341428394399538
+[2025-01-27 18:51:16,423][src.models.time_varying_model][INFO] - BCE calculation for test.
+[2025-01-27 18:51:16,424][src.models.rmsn][INFO] - Propensity scores for test.
+[2025-01-27 18:51:27,282][__main__][INFO] - Test normalised RMSE (all): 0.7261604012278198; Test normalised RMSE (orig): 0.7256168982918995.
+[2025-01-27 18:51:27,323][src.models.rmsn][INFO] - Input size of propensity_history: 4
+[2025-01-27 18:54:48,590][src.models.time_varying_model][INFO] - BCE calculation for val.
+[2025-01-27 18:54:48,590][src.models.rmsn][INFO] - Propensity scores for val.
+[2025-01-27 18:54:49,049][__main__][INFO] - Val normalised BCE (all): 0.7213796704088009; Val normalised RMSE (orig): 0.7212954023751119
+[2025-01-27 18:54:49,050][src.models.time_varying_model][INFO] - BCE calculation for test.
+[2025-01-27 18:54:49,050][src.models.rmsn][INFO] - Propensity scores for test.
+[2025-01-27 18:55:00,108][__main__][INFO] - Test normalised BCE (all): 0.7453329749994032; Test normalised BCE (orig): 0.7490119928496748.
+[2025-01-27 18:55:00,151][src.models.rmsn][INFO] - Input size of encoder: 4
+[2025-01-27 18:55:00,164][src.models.rmsn][INFO] - Propensity scores for train.
+[2025-01-27 18:55:03,159][src.models.rmsn][INFO] - Propensity scores for train.
+[2025-01-27 18:58:49,633][src.models.time_varying_model][INFO] - RMSE calculation for val.
+[2025-01-27 18:58:49,634][src.models.rmsn][INFO] - Predictions for val.
+[2025-01-27 18:58:50,034][__main__][INFO] - Val normalised RMSE (all): 0.7215752955965978; Val normalised RMSE (orig): 0.7118251312805993
+[2025-01-27 18:58:50,034][src.models.time_varying_model][INFO] - RMSE calculation for test.
+[2025-01-27 18:58:50,034][src.models.rmsn][INFO] - Predictions for test.
+[2025-01-27 18:59:01,387][__main__][INFO] - Test normalised RMSE (all): 1.0919155046720341; Test normalised RMSE (orig): 0.922606037984282; Test normalised RMSE (only counterfactual): 1.8732098633408139
+[2025-01-27 18:59:01,436][src.models.rmsn][INFO] - Input size of decoder: 4
+[2025-01-27 18:59:01,450][src.data.cancer_sim.dataset][INFO] - train Dataset already processed
+[2025-01-27 18:59:01,450][src.data.cancer_sim.dataset][INFO] - val Dataset already processed
+[2025-01-27 18:59:01,450][src.data.cancer_sim.dataset][INFO] - Processing test dataset before training
+[2025-01-27 18:59:03,629][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'cancer_volume': (548744, 65), 'chemo_application': (548744, 65), 'radio_application': (548744, 65), 'sequence_lengths': (548744,), 'patient_types': (548744,), 'patient_ids_all_trajectories': (548744,), 'patient_current_t': (548744,), 'prev_treatments': (548744, 64, 2), 'current_treatments': (548744, 64, 2), 'current_covariates': (548744, 64, 2), 'outputs': (548744, 64, 1), 'active_entries': (548744, 64, 1), 'unscaled_outputs': (548744, 64, 1), 'prev_outputs': (548744, 64, 1), 'static_features': (548744, 1)}
+[2025-01-27 18:59:03,631][src.models.rmsn][INFO] - Representations inference for train.
+[2025-01-27 18:59:04,686][src.models.rmsn][INFO] - Representations inference for val.
+[2025-01-27 18:59:05,129][src.models.rmsn][INFO] - Representations inference for test.
+[2025-01-27 18:59:32,723][src.models.rmsn][INFO] - Predictions for test.
+[2025-01-27 19:00:01,227][src.data.cancer_sim.dataset][INFO] - Processing train dataset before training (multiple sequences)
+[2025-01-27 19:00:04,100][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'init_state': (515994, 12), 'original_index': (515994,), 'active_encoder_r': (515994, 59), 'prev_treatments': (515994, 5, 2), 'current_treatments': (515994, 5, 2), 'current_covariates': (515994, 5, 2), 'prev_outputs': (515994, 5, 1), 'static_features': (515994, 1), 'outputs': (515994, 5, 1), 'sequence_lengths': (515994,), 'active_entries': (515994, 5, 1), 'unscaled_outputs': (515994, 5, 1), 'stabilized_weights': (515994, 6)}
+[2025-01-27 19:00:04,102][src.data.cancer_sim.dataset][INFO] - Processing val dataset before training (multiple sequences)
+[2025-01-27 19:00:04,374][src.data.cancer_sim.dataset][INFO] - Shape of processed val data: {'init_state': (51287, 12), 'original_index': (51287,), 'active_encoder_r': (51287, 59), 'prev_treatments': (51287, 5, 2), 'current_treatments': (51287, 5, 2), 'current_covariates': (51287, 5, 2), 'prev_outputs': (51287, 5, 1), 'static_features': (51287, 1), 'outputs': (51287, 5, 1), 'sequence_lengths': (51287,), 'active_entries': (51287, 5, 1), 'unscaled_outputs': (51287, 5, 1)}
+[2025-01-27 19:00:04,374][src.data.cancer_sim.dataset][INFO] - Processing test dataset before testing (multiple sequences)
+[2025-01-27 19:00:10,950][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'active_encoder_r': (548744, 59), 'prev_treatments': (548744, 5, 2), 'current_treatments': (548744, 5, 2), 'current_covariates': (548744, 5, 2), 'prev_outputs': (548744, 5, 1), 'static_features': (548744, 1), 'outputs': (548744, 5, 1), 'sequence_lengths': (548744,), 'active_entries': (548744, 5, 1), 'unscaled_outputs': (548744, 5, 1), 'patient_types': (548744,), 'patient_ids_all_trajectories': (548744,), 'patient_current_t': (548744,), 'init_state': (548744, 12)}
+[2025-01-27 19:00:10,956][src.data.cancer_sim.dataset][INFO] - Processing test dataset before testing (autoregressive)
+[2025-01-27 19:00:14,712][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'current_covariates': (548744, 5, 2), 'prev_treatments': (548744, 5, 2), 'current_treatments': (548744, 5, 2), 'init_state': (548744, 12), 'active_encoder_r': (548744, 59), 'active_entries': (548744, 5, 1), 'prev_outputs': (548744, 5, 1), 'static_features': (548744, 1)}
+[2025-01-27 19:42:37,936][src.models.time_varying_model][INFO] - RMSE calculation for val.
+[2025-01-27 19:42:37,937][src.models.rmsn][INFO] - Predictions for val.
+[2025-01-27 19:42:39,992][__main__][INFO] - Val normalised RMSE (all): 0.3352406368529799; Val normalised RMSE (orig): 0.3352406368529809
+[2025-01-27 19:42:39,993][src.models.time_varying_model][INFO] - RMSE calculation for test.
+[2025-01-27 19:42:39,993][src.models.time_varying_model][INFO] - Autoregressive Prediction for test.
+[2025-01-27 19:42:40,004][src.models.time_varying_model][INFO] - t = 2
+[2025-01-27 19:42:40,004][src.models.rmsn][INFO] - Predictions for test.
+[2025-01-27 19:42:54,885][src.models.time_varying_model][INFO] - t = 3
+[2025-01-27 19:42:54,885][src.models.rmsn][INFO] - Predictions for test.
+[2025-01-27 19:43:09,479][src.models.time_varying_model][INFO] - t = 4
+[2025-01-27 19:43:09,479][src.models.rmsn][INFO] - Predictions for test.
+[2025-01-27 19:43:24,517][src.models.time_varying_model][INFO] - t = 5
+[2025-01-27 19:43:24,518][src.models.rmsn][INFO] - Predictions for test.
+[2025-01-27 19:43:39,250][src.models.time_varying_model][INFO] - t = 6
+[2025-01-27 19:43:39,251][src.models.rmsn][INFO] - Predictions for test.
+[2025-01-27 19:43:55,251][__main__][INFO] - Test normalised RMSE (n-step prediction): {'2-step': 3.0577888489083693, '3-step': 3.5908721692246557, '4-step': 3.3452615415317974, '5-step': 3.055049316614171, '6-step': 2.7868498511347295}

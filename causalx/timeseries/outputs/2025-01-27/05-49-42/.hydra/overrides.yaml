@@ -1,0 +1,9 @@
+- +dataset=cancer_sim
+- +backbone=crn
+- +backbone/crn_hparams/cancer_sim_grad_reverse_random=2_finetune.yaml
+- exp.seed=10
+- exp.gap_epoch=10
+- exp.max_epochs=150
+- model.encoder.batch_size=256
+- dataset.noise_percentage=0.0
+- exp.mlflow_uri=http://127.0.0.1:5006

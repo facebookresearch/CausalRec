@@ -1,0 +1,13 @@
+name: "S_MMoE"
+loss_config:
+  loss_type: "bce"
+  loss_weight_list: [1, 1]
+num_experts: 4
+expert_hidden_units: [512, 256, 128]
+gate_hidden_units: [128, 64]
+tower_hidden_units: [128, 64]
+hidden_activations: "ReLU"
+net_dropout: 0
+batch_norm: False
+task: binary_classification
+  

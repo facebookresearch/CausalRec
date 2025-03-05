@@ -1,0 +1,4 @@
+- +dataset=cancer_sim
+- +backbone=gnet
+- +backbone/gnet_hparams/cancer_sim=5.yaml
+- exp.seed=10

@@ -1,0 +1,5 @@
+- +dataset=cancer_sim
+- +backbone=ct
+- +backbone/ct_hparams/cancer_sim_subgroup_random=6_ct_random_SGA_Kmeans
+- exp.seed=10
+- exp.clustering_method=GMM

@@ -1,0 +1,5 @@
+- +dataset=cancer_sim
+- +backbone=crn
+- +backbone/crn_hparams/cancer_sim_grad_reverse_random=1_finetune.yaml
+- exp.seed=10
+- exp.gap_epoch=5

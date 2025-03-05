@@ -1,0 +1,142 @@
+[2025-01-27 05:45:34,182][__main__][INFO] - 
+model:
+  dim_treatments: 4
+  dim_vitals: 0
+  dim_static_features: 1
+  dim_outcomes: 1
+  name: CRN
+  encoder:
+    _target_: src.models.crn.CRNEncoder
+    seq_hidden_units: 24
+    br_size: 24
+    fc_hidden_units: 96
+    dropout_rate: 0.2
+    num_layer: 1
+    batch_size: 256
+    optimizer:
+      optimizer_cls: adam
+      learning_rate: 0.001
+      weight_decay: 0.0
+      lr_scheduler: false
+    tune_hparams: false
+    tune_range: 50
+    hparams_grid: null
+    resources_per_trial: null
+  train_decoder: true
+  decoder:
+    _target_: src.models.crn.CRNDecoder
+    seq_hidden_units: null
+    br_size: 24
+    fc_hidden_units: 12
+    dropout_rate: 0.1
+    num_layer: 1
+    batch_size: 1024
+    optimizer:
+      optimizer_cls: adam
+      learning_rate: 0.001
+      weight_decay: 0.0
+      lr_scheduler: false
+    tune_hparams: false
+    tune_range: 30
+    hparams_grid: null
+    resources_per_trial: null
+dataset:
+  val_batch_size: 512
+  treatment_mode: multiclass
+  _target_: src.data.SyntheticCancerDatasetCollection
+  name: tumor_generator
+  coeff: 2.0
+  chemo_coeff: 2.0
+  radio_coeff: 2.0
+  seed: 10
+  random: true
+  noise_percentage: 0.0
+  num_patients:
+    train: 10000
+    val: 1000
+    test: 1000
+  window_size: 15
+  lag: 0
+  max_seq_length: 60
+  projection_horizon: 5
+  cf_seq_mode: sliding_treatment
+exp:
+  seed: 10
+  gpus:
+  - 0
+  max_epochs: 150
+  logging: true
+  mlflow_uri: http://127.0.0.1:5005
+  unscale_rmse: true
+  percentage_rmse: true
+  alpha: 0.01
+  update_alpha: true
+  alpha_rate: exp
+  initial_balancing_method: grad_reverse
+  final_balancing_method: subgroup
+  bce_weight: false
+  weights_ema: false
+  beta: 0.99
+  alpha_wass: 0.0001
+  alpha_wass_epoch: false
+  alpha_wass_growth: 0.001
+  alpha_wass_max: 0.01
+  balancing: grad_reverse
+  balancing_switch_epoch: 99
+  gap_epoch: 10
+  clustering_method: GMM
+  number_clusters: 2
+  num_timepoints: 59
+  checkpoint_dir: ./checkpoints/cancer/crn/2
+
+[2025-01-27 05:45:34,196][root][INFO] - Simulating initial volumes for stage I  with norm params: mu=1.72, sigma=4.7, lb=-0.6221218732608373, ub=-0.023523848418276528
+[2025-01-27 05:45:34,198][root][INFO] - Simulating initial volumes for stage II  with norm params: mu=1.96, sigma=1.63, lb=-1.9410876100159118, ub=0.3711345751297772
+[2025-01-27 05:45:34,198][root][INFO] - Simulating initial volumes for stage IIIA  with norm params: mu=1.91, sigma=9.4, lb=-0.33127370258786554, ub=0.06967546355973796
+[2025-01-27 05:45:34,199][root][INFO] - Simulating initial volumes for stage IIIB  with norm params: mu=2.76, sigma=6.87, lb=-0.5769974969906748, ub=-0.02839165102452155
+[2025-01-27 05:45:34,202][root][INFO] - Simulating initial volumes for stage IV  with norm params: mu=3.86, sigma=8.82, lb=-0.5741465764541877, ub=-0.14683113860980307
+[2025-01-27 05:45:34,211][root][INFO] - Got correlated params for 4658 patients
+[2025-01-27 05:45:34,215][root][INFO] - Got correlated params for 9338 patients
+[2025-01-27 05:45:34,220][root][INFO] - Got correlated params for 13912 patients
+[2025-01-27 05:45:34,227][root][INFO] - Simulating beta_c parameters
+[2025-01-27 05:45:34,232][root][INFO] - Randomising outputs
+[2025-01-27 05:45:51,703][src.data.cancer_sim.dataset][INFO] - Processing train dataset before training
+[2025-01-27 05:45:52,730][src.data.cancer_sim.dataset][INFO] - Shape of processed train data: {'cancer_volume': (10000, 60), 'chemo_dosage': (10000, 60), 'radio_dosage': (10000, 60), 'chemo_application': (10000, 60), 'radio_application': (10000, 60), 'chemo_probabilities': (10000, 60), 'radio_probabilities': (10000, 60), 'sequence_lengths': (10000,), 'death_flags': (10000, 60), 'recovery_flags': (10000, 60), 'patient_types': (10000,), 'prev_treatments': (10000, 59, 4), 'current_treatments': (10000, 59, 4), 'current_covariates': (10000, 59, 2), 'outputs': (10000, 59, 1), 'active_entries': (10000, 59, 1), 'unscaled_outputs': (10000, 59, 1), 'prev_outputs': (10000, 59, 1), 'static_features': (10000, 1)}
+[2025-01-27 05:45:52,745][root][INFO] - Simulating initial volumes for stage I  with norm params: mu=1.72, sigma=4.7, lb=-0.6221218732608373, ub=-0.023523848418276528
+[2025-01-27 05:45:52,746][root][INFO] - Simulating initial volumes for stage II  with norm params: mu=1.96, sigma=1.63, lb=-1.9410876100159118, ub=0.3711345751297772
+[2025-01-27 05:45:52,747][root][INFO] - Simulating initial volumes for stage IIIA  with norm params: mu=1.91, sigma=9.4, lb=-0.33127370258786554, ub=0.06967546355973796
+[2025-01-27 05:45:52,748][root][INFO] - Simulating initial volumes for stage IIIB  with norm params: mu=2.76, sigma=6.87, lb=-0.5769974969906748, ub=-0.02839165102452155
+[2025-01-27 05:45:52,749][root][INFO] - Simulating initial volumes for stage IV  with norm params: mu=3.86, sigma=8.82, lb=-0.5741465764541877, ub=-0.14683113860980307
+[2025-01-27 05:45:52,750][root][INFO] - Got correlated params for 499 patients
+[2025-01-27 05:45:52,751][root][INFO] - Got correlated params for 982 patients
+[2025-01-27 05:45:52,753][root][INFO] - Got correlated params for 1434 patients
+[2025-01-27 05:45:52,754][root][INFO] - Simulating beta_c parameters
+[2025-01-27 05:45:52,754][root][INFO] - Randomising outputs
+[2025-01-27 05:45:54,411][root][INFO] - Simulating initial volumes for stage I  with norm params: mu=1.72, sigma=4.7, lb=-0.6221218732608373, ub=-0.023523848418276528
+[2025-01-27 05:45:54,411][root][INFO] - Simulating initial volumes for stage II  with norm params: mu=1.96, sigma=1.63, lb=-1.9410876100159118, ub=0.3711345751297772
+[2025-01-27 05:45:54,412][root][INFO] - Simulating initial volumes for stage IIIA  with norm params: mu=1.91, sigma=9.4, lb=-0.33127370258786554, ub=0.06967546355973796
+[2025-01-27 05:45:54,413][root][INFO] - Simulating initial volumes for stage IIIB  with norm params: mu=2.76, sigma=6.87, lb=-0.5769974969906748, ub=-0.02839165102452155
+[2025-01-27 05:45:54,413][root][INFO] - Simulating initial volumes for stage IV  with norm params: mu=3.86, sigma=8.82, lb=-0.5741465764541877, ub=-0.14683113860980307
+[2025-01-27 05:45:54,415][root][INFO] - Got correlated params for 494 patients
+[2025-01-27 05:45:54,416][root][INFO] - Got correlated params for 937 patients
+[2025-01-27 05:45:54,417][root][INFO] - Got correlated params for 1397 patients
+[2025-01-27 05:45:54,418][root][INFO] - Simulating beta_c parameters
+[2025-01-27 05:45:54,419][root][INFO] - Randomising outputs
+[2025-01-27 05:46:00,518][root][INFO] - Simulating initial volumes for stage I  with norm params: mu=1.72, sigma=4.7, lb=-0.6221218732608373, ub=-0.023523848418276528
+[2025-01-27 05:46:00,519][root][INFO] - Simulating initial volumes for stage II  with norm params: mu=1.96, sigma=1.63, lb=-1.9410876100159118, ub=0.3711345751297772
+[2025-01-27 05:46:00,520][root][INFO] - Simulating initial volumes for stage IIIA  with norm params: mu=1.91, sigma=9.4, lb=-0.33127370258786554, ub=0.06967546355973796
+[2025-01-27 05:46:00,520][root][INFO] - Simulating initial volumes for stage IIIB  with norm params: mu=2.76, sigma=6.87, lb=-0.5769974969906748, ub=-0.02839165102452155
+[2025-01-27 05:46:00,521][root][INFO] - Simulating initial volumes for stage IV  with norm params: mu=3.86, sigma=8.82, lb=-0.5741465764541877, ub=-0.14683113860980307
+[2025-01-27 05:46:00,523][root][INFO] - Got correlated params for 434 patients
+[2025-01-27 05:46:00,524][root][INFO] - Got correlated params for 874 patients
+[2025-01-27 05:46:00,525][root][INFO] - Got correlated params for 1357 patients
+[2025-01-27 05:46:00,526][root][INFO] - Simulating beta_c parameters
+[2025-01-27 05:46:00,527][root][INFO] - Randomising outputs
+[2025-01-27 05:46:28,557][src.data.cancer_sim.dataset][INFO] - train Dataset already processed
+[2025-01-27 05:46:28,558][src.data.cancer_sim.dataset][INFO] - Processing val dataset before training
+[2025-01-27 05:46:28,660][src.data.cancer_sim.dataset][INFO] - Shape of processed val data: {'cancer_volume': (1000, 60), 'chemo_dosage': (1000, 60), 'radio_dosage': (1000, 60), 'chemo_application': (1000, 60), 'radio_application': (1000, 60), 'chemo_probabilities': (1000, 60), 'radio_probabilities': (1000, 60), 'sequence_lengths': (1000,), 'death_flags': (1000, 60), 'recovery_flags': (1000, 60), 'patient_types': (1000,), 'prev_treatments': (1000, 59, 4), 'current_treatments': (1000, 59, 4), 'current_covariates': (1000, 59, 2), 'outputs': (1000, 59, 1), 'active_entries': (1000, 59, 1), 'unscaled_outputs': (1000, 59, 1), 'prev_outputs': (1000, 59, 1), 'static_features': (1000, 1)}
+[2025-01-27 05:46:28,661][src.data.cancer_sim.dataset][INFO] - Processing test dataset before training
+[2025-01-27 05:46:49,383][src.data.cancer_sim.dataset][INFO] - Shape of processed test data: {'cancer_volume': (224132, 60), 'chemo_application': (224132, 60), 'radio_application': (224132, 60), 'sequence_lengths': (224132,), 'patient_types': (224132,), 'prev_treatments': (224132, 59, 4), 'current_treatments': (224132, 59, 4), 'current_covariates': (224132, 59, 2), 'outputs': (224132, 59, 1), 'active_entries': (224132, 59, 1), 'unscaled_outputs': (224132, 59, 1), 'prev_outputs': (224132, 59, 1), 'static_features': (224132, 1)}
+[2025-01-27 05:46:49,406][urllib3.connectionpool][WARNING] - Retrying (JitteredRetry(total=4, connect=4, read=5, redirect=5, status=5)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fcd3b6949d0>: Failed to establish a new connection: [Errno 111] Connection refused')': /api/2.0/mlflow/experiments/get-by-name?experiment_name=CRN%2Ftumor_generator
+[2025-01-27 05:46:53,411][urllib3.connectionpool][WARNING] - Retrying (JitteredRetry(total=3, connect=3, read=5, redirect=5, status=5)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fcd3b694e50>: Failed to establish a new connection: [Errno 111] Connection refused')': /api/2.0/mlflow/experiments/get-by-name?experiment_name=CRN%2Ftumor_generator
+[2025-01-27 05:47:01,420][urllib3.connectionpool][WARNING] - Retrying (JitteredRetry(total=2, connect=2, read=5, redirect=5, status=5)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fcd3b6946d0>: Failed to establish a new connection: [Errno 111] Connection refused')': /api/2.0/mlflow/experiments/get-by-name?experiment_name=CRN%2Ftumor_generator
+[2025-01-27 05:47:17,437][urllib3.connectionpool][WARNING] - Retrying (JitteredRetry(total=1, connect=1, read=5, redirect=5, status=5)) after connection broken by 'NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fcd3b694610>: Failed to establish a new connection: [Errno 111] Connection refused')': /api/2.0/mlflow/experiments/get-by-name?experiment_name=CRN%2Ftumor_generator

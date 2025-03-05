@@ -1,0 +1,5 @@
+name: "Slearner"
+loss_config:
+  loss_type: "bce_ctcvr"
+  loss_weight_list: [1, 1]
+  

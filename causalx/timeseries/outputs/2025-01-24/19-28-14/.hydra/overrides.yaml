@@ -1,0 +1,4 @@
+- +dataset=mimic3_synthetic
+- +backbone=crn
+- +backbone/crn_hparams/mimic3_synthetic=1000_random.yaml
+- exp.seed=123

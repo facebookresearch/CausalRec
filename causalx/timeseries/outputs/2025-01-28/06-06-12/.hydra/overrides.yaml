@@ -1,0 +1,7 @@
+- +dataset=cancer_sim
+- +backbone=crn
+- +backbone/crn_hparams/cancer_sim_grad_reverse_random=6_crn_only.yaml
+- exp.initial_balancing_method=grad_reverse
+- exp.seed=10
+- exp.balancing_switch_epoch=99
+- exp.max_epochs=100

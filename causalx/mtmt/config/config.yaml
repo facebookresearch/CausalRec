@@ -1,0 +1,39 @@
+defaults:
+  - data: mtlift
+  - model: slearner
+  - model/search_space@hydra.sweeper.params: ${model}
+  - train: default_trainer
+  - train/search_space@hydra.sweeper.params: ${train}
+  - _self_
+  - override hydra/sweeper: optuna
+  - override hydra/sweeper/sampler: tpe
+
+objective: auuc_outcome_0
+
+seeds: [42]
+
+debug: false
+
+plot: false
+
+eval_train: false
+
+logging:
+  tensorboard:
+    log_dir: ${hydra:sweep.dir}/tensorboard_logs
+
+seed: 42
+
+hydra:
+    run:
+      dir: runs/${model.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    sweep:
+      dir: multirun/${model.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}/${hydra.sweeper.sampler.seed}
+    sweeper:
+        sampler:
+            seed: 42
+        direction: maximize
+        study_name: optuna_test
+        storage: null
+        n_trials: 2
+        n_jobs: 1

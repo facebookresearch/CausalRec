@@ -1,0 +1,11 @@
+- +dataset=cancer_sim
+- +backbone=crn
+- +backbone/crn_hparams/cancer_sim_grad_reverse_random=3_finetune.yaml
+- exp.seed=10
+- exp.max_epochs=120
+- model.encoder.batch_size=1024
+- model.encoder.dropout_rate=0.2
+- model.decoder.batch_size=4096
+- model.encoder.optimizer.learning_rate=0.005
+- model.decoder.optimizer.learning_rate=0.01
+- model.decoder.dropout_rate=0.2

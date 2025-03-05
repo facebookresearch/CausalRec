@@ -1,0 +1,4 @@
+- +dataset=cancer_sim
+- +backbone=crn
+- +backbone/crn_hparams/cancer_sim_subgroup_random=3.yaml
+- exp.seed=10

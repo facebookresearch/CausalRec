@@ -1,0 +1,4 @@
+- +dataset=cancer_sim
+- +backbone=ct
+- +backbone/ct_hparams/cancer_sim_subgroup_random=0_finetune.yaml
+- exp.seed=101

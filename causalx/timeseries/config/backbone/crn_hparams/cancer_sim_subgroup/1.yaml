@@ -1,0 +1,33 @@
+# @package _global_
+dataset:
+  coeff: 1.0
+
+model:
+  encoder:
+    optimizer:
+      learning_rate: 0.005
+    batch_size: 1024
+    seq_hidden_units: 24
+    br_size: 18
+    fc_hidden_units: 36
+    dropout_rate: 0.1
+
+  train_decoder: True
+  decoder:
+    optimizer:
+      learning_rate: 0.01
+    batch_size: 4096
+    br_size: 24
+    fc_hidden_units: 12
+    dropout_rate: 0.1
+
+exp:
+  weights_ema: True
+  alpha: 0
+  alpha_wass: 0.0001
+  alpha_wass_growth: 0.001
+  alpha_wass_max: 0.01
+  alpha_wass_epoch: False
+  balancing: subgroup
+  max_epochs: 200
+  num_timepoints: 59
