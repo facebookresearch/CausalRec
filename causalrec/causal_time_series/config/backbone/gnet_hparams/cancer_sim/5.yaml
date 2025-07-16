@@ -1,0 +1,24 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+#
+
+# pyre-strict
+# @package _global_
+dataset:
+  coeff: 5.0
+  random: False
+  noise_percentage: 0.00
+
+model:
+  g_net:
+    optimizer:
+      learning_rate: 0.01
+    num_layer: 1
+    batch_size: 256
+    seq_hidden_units: 24
+    fc_hidden_units: 72
+    dropout_rate: 0.1
+    r_size: 18

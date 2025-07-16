@@ -1,0 +1,50 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+#
+
+# pyre-strict
+# @package _global_
+dataset:
+  coeff: 6.0
+  random: False
+  noise_percentage: 0.00  
+
+model:
+  encoder:
+    optimizer:
+      learning_rate: 0.001
+    batch_size: 64
+    seq_hidden_units: 24
+    br_size: 24
+    fc_hidden_units: 96
+    dropout_rate: 0.2
+
+  train_decoder: True
+  decoder:
+    optimizer:
+      learning_rate: 0.001
+    batch_size: 1024
+    br_size: 24
+    fc_hidden_units: 12
+    dropout_rate: 0.1
+
+exp:
+  weights_ema: False
+  alpha: 0.01
+  beta: 0.99
+  alpha_wass: 0.0001
+  alpha_wass_growth: 0.001
+  alpha_wass_max: 0.01
+  alpha_wass_epoch: False
+  final_balancing_method: grad_reverse
+  initial_balancing_method: grad_reverse
+  balancing_switch_epoch: 99
+  max_epochs: 100
+  gap_epoch: 10
+  clustering_method: GMM
+  number_clusters: 2
+  num_timepoints: 59
+  checkpoint_dir: "./checkpoints/cancer/crn/6"

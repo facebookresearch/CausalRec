@@ -1,0 +1,17 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+#
+
+# pyre-strict
+name: "criteo"
+path: "/home/weishi0079/MTML/data/real_world/criteo_uplift_v2.1.csv"
+feature_cols: [f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11]
+outcome_cols: [visit]
+treatment_col: treatment
+num_treatment: 2
+processor_type: minmax  # Options: "minmax" or "standard"
+use_outcome_proc: true
+outcome_processor_type: minmax  # Options: "minmax" or "standard"

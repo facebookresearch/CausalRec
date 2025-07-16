@@ -1,0 +1,29 @@
+name: causalrec
+channels:
+  - defaults
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=11.8
+  - cudatoolkit=11.8
+  - pandas
+  - pip
+  - pip:
+    - torchtnt
+    - torcheval
+    - geomloss
+    - tensorboard
+    - scikit-learn
+    - numpy
+    - causalml
+    # Hydra and related packages
+    - hydra-core
+    - hydra-colorlog
+    - hydra-optuna-sweeper
+    - omegaconf
+    # Additional PyTorch related packages
+    - torch-tb-profiler

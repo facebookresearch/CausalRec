@@ -1,0 +1,18 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+#
+
+# pyre-strict
+log_every_n_steps: 1
+lr: 0.001 #0.001
+optimizer_name: "adam"
+weight_decay: 0.0001
+batch_size: 512
+max_epochs: 1 #1
+evaluate_every_n_epochs: 1
+checkpoint_interval: 1  # Save a checkpoint every n epochs
+max_checkpoints: 1      # Keep only the n most recent checkpoints
+resume_from_checkpoint: null  # Path to checkpoint to resume training

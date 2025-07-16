@@ -1,0 +1,26 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+#
+
+# pyre-strict
+name: "TARNet"
+loss_config:
+  loss_type: "bce"
+  loss_weight_list: [1, 1]
+input_dim: 0
+hidden_dims: [128, 64, 32]
+output_dim: 2
+dropout_rate: 0.2
+learning_rate: 0.001
+weight_decay: 0.0001
+
+max_depth: 4
+max_leaves: 31
+gbdt_learning_rate: 0.05
+early_stopping_round: 20
+feature_fraction: 0.9
+bagging_fraction: 0.8
+bagging_freq: 5

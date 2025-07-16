@@ -1,0 +1,30 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+# All rights reserved.
+#
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+#
+
+# pyre-strict
+defaults:
+  - data: criteo
+  - model: tarnet
+  - trainer: trainer
+
+seeds: [42]
+
+debug: false
+
+plot: false
+
+eval_train: false
+
+logging:
+  tensorboard:
+    log_dir: ${hydra:run.dir}/tensorboard_logs
+
+seed: 42
+
+hydra:
+    run:
+      dir: runs/${model.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}
