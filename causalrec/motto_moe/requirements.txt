@@ -10,7 +10,6 @@ attrs==25.1.0
 autopage==0.5.2
 blas==1.0
 bottleneck==1.4.2
-brotli-python==1.0.9
 bzip2==1.0.8
 ca-certificates==2025.1.31
 cachetools==5.5.1
